@@ -18,3 +18,6 @@ app.get("/campgrounds", function(req, res){
 });
 
 app.listen(3001, () => console.log(`It's over Anakin. I have the high ground`));
+
+
+// <%- include("partials/header") %>
