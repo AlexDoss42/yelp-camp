@@ -13,6 +13,8 @@ app.get("/campgrounds", function(req, res){
     {name: "Goblin's Lair", image: "https://sp-images.summitpost.org/835994.jpg?auto=format&fit=max&h=800&ixlib=php-2.1.1&q=35&s=f8c0015266577409e89469e7d73f8c4a"},
     {name: "Iceland's Secret", image: "https://www.freshoffthegrid.com/wp-content/uploads/Camping-in-Iceland.jpg"}
   ]
+
+  res.render("campgrounds", { campgrounds: campgrounds });
 });
 
 app.listen(3001, () => console.log(`It's over Anakin. I have the high ground`));
