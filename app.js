@@ -1,6 +1,8 @@
 var express = require("express");
 var app = express();
+var bodyParser = require("body-parser");
 
+app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
 app.get("/", function(req, res){
@@ -13,6 +15,10 @@ app.get("/campgrounds", function(req, res){
     {name: "Goblin's Lair", image: "https://sp-images.summitpost.org/835994.jpg?auto=format&fit=max&h=800&ixlib=php-2.1.1&q=35&s=f8c0015266577409e89469e7d73f8c4a"},
     {name: "Iceland's Secret", image: "https://www.freshoffthegrid.com/wp-content/uploads/Camping-in-Iceland.jpg"}
   ]
+
+  app.post("/campgrounds", function(req, res){
+    res.send('You hit the post route')
+  });
 
   res.render("campgrounds", { campgrounds: campgrounds });
 });
