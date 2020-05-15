@@ -23,6 +23,10 @@ app.get("/campgrounds", function(req, res){
   res.render("campgrounds", { campgrounds: campgrounds });
 });
 
+app.get("/campground/new", function(req, res){
+  res.render("new.ejs");
+})
+
 app.listen(3001, () => console.log(`It's over Anakin. I have the high ground`));
 
 
