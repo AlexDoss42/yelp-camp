@@ -9,7 +9,8 @@ app.set("view engine", "ejs");
 
 var campgroundSchema = new mongoose.Schema({
   name: String,
-  image: String
+  image: String,
+  description: String
 });
 
 var Campground = mongoose.model("Campground", campgroundSchema);
@@ -17,7 +18,8 @@ var Campground = mongoose.model("Campground", campgroundSchema);
 Campground.create(
   {
     name: "Salmon Creek",
-    image: "https://farm9.staticflickr.com/8442/7962474612_bf2baf67c0.jpg"
+    image: "https://farm9.staticflickr.com/8442/7962474612_bf2baf67c0.jpg",
+    description: "A nice little campsite on the shore of the Salmon Creek"
   }, function(err, campground){
     if(err){
       console.log(err);
@@ -64,6 +66,10 @@ app.post("/campgrounds", function(req, res){
 
 app.get("/campground/new", function(req, res){
   res.render("new.ejs");
+});
+
+app.get("/campgrounds/:id", function(req, res){
+  res.send("THIS WILL BE THE SHOW PAGE ONE DAY!");
 });
 
 app.listen(3001, () => console.log(`It's over Anakin. I have the high ground`));
