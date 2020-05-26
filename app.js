@@ -5,10 +5,13 @@ var mongoose = require('mongoose');
 var Campground = require("./models/campground");
 var Comment = require("./models/comment");
 var User = require("./models/user");
+var seedDb = require("./seed");
 
 mongoose.connect("mongodb://localhost/yelp_camp");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
+seedDb();
 
 Campground.create(
   {
