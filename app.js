@@ -33,7 +33,7 @@ app.get("/campgrounds", function(req, res){
     if(err){
       console.log(err)
     } else {
-      res.render("index", {campgrounds: allCampgrounds});
+      res.render("campground/index", {campgrounds: allCampgrounds});
     }
   })
 });
@@ -55,7 +55,7 @@ app.post("/campgrounds", function(req, res){
   
 
 app.get("/campground/new", function(req, res){
-  res.render("new.ejs");
+  res.render("campground/new");
 });
 
 app.get("/campgrounds/:id", function(req, res){
@@ -63,9 +63,15 @@ app.get("/campgrounds/:id", function(req, res){
     if(err){
       console.log(err);
     } else {
-      res.render("show", {campground: foundCampground});
+      res.render("campground/show", {campground: foundCampground});
     }
   });
+});
+
+// Comments routes
+
+app.get("/campgrounds/:id/comments/new", function(req, res){
+  res.render("comments/new");
 });
 
 app.listen(3001, () => console.log(`It's over Anakin. I have the high ground`));
