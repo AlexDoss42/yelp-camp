@@ -4,11 +4,10 @@ var bodyParser = require("body-parser");
 var mongoose = require('mongoose');
 var Campground = require("./models/campground");
 var Comment = require("./models/comment");
-var User = require("./models/user");
 var seedDb = require("./seed");
 var passport = require("passport");
 var localStrategy = require("passport-local");
-var User = require(".models/user")
+var User = require("./models/user")
 
 mongoose.connect("mongodb://localhost/yelp_camp");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -20,7 +19,12 @@ app.use(require("express-session")({
   secret: "jfaspdoh23498J_@*$H_)ASNCOAWJRN_AD)*(JR!fasd",
   resave: false,
   saveUninitialized: false
-}))
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 Campground.create(
   {
