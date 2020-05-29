@@ -16,6 +16,12 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 seedDb();
 
+app.use(require("express-session")({
+  secret: "jfaspdoh23498J_@*$H_)ASNCOAWJRN_AD)*(JR!fasd",
+  resave: false,
+  saveUninitialized: false
+}))
+
 Campground.create(
   {
     name: "Salmon Creek",
