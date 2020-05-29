@@ -6,6 +6,9 @@ var Campground = require("./models/campground");
 var Comment = require("./models/comment");
 var User = require("./models/user");
 var seedDb = require("./seed");
+var passport = require("passport");
+var localStrategy = require("passport-local");
+var User = require(".models/user")
 
 mongoose.connect("mongodb://localhost/yelp_camp");
 app.use(bodyParser.urlencoded({extended: true}));
