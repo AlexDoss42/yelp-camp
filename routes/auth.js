@@ -1,15 +1,15 @@
-app.get("/", function(req, res){
+var express = require("express");
+var router = express.Router();
+
+router.get("/", function(req, res){
   res.render("landing");
 });
 
-
-
-
-app.get("/register", function(req, res){
+router.get("/register", function(req, res){
   res.render("/register");
 });
 
-app.post("/register", function(req, res){
+router.post("/register", function(req, res){
   var newUser = new User({username: req.body.username})
   User.register(newUser, req.body.password, function(err, user){
     if(err){
@@ -22,18 +22,18 @@ app.post("/register", function(req, res){
   });
 });
 
-app.get("/login", function(req, res){
+router.get("/login", function(req, res){
   res.render("/login");
 });
 
-app.post("login", passport.authenticate("local", 
+router.post("login", passport.authenticate("local", 
   {
     successRedirect: "/campgrounds",
     failureRedirect: "/login"
   }), function(req, res){
 });
 
-app.get("/logout", function(req, res){
+router.get("/logout", function(req, res){
   req.logOut();
   res.redirect("/campgrounds");
 });
@@ -44,3 +44,5 @@ function isLoggedIn(req, res, next){
   }
   res.redirect("/login");
 };
+
+module.exports = router;

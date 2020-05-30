@@ -1,4 +1,7 @@
-app.get("/campgrounds", function(req, res){
+var express = require("express");
+var router = express.Router();
+
+router.get("/campgrounds", function(req, res){
   Campground.find({}, function(err, allCampgrounds){
     if(err){
       console.log(err)
@@ -8,7 +11,7 @@ app.get("/campgrounds", function(req, res){
   })
 });
 
-app.post("/campgrounds", function(req, res){
+router.post("/campgrounds", function(req, res){
   res.send('You hit the post route')
   var name = req.body.name;
   var image = req.body.image;
@@ -24,11 +27,11 @@ app.post("/campgrounds", function(req, res){
 });
   
 
-app.get("/campground/new", function(req, res){
+router.get("/campground/new", function(req, res){
   res.render("campground/new");
 });
 
-app.get("/campgrounds/:id", function(req, res){
+router.get("/campgrounds/:id", function(req, res){
   Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
     if(err){
       console.log(err);
@@ -37,3 +40,5 @@ app.get("/campgrounds/:id", function(req, res){
     }
   });
 });
+
+module.exports = router;

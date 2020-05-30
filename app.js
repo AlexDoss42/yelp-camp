@@ -9,6 +9,11 @@ var passport = require("passport");
 var localStrategy = require("passport-local");
 var User = require("./models/user")
 
+
+var commentRoutes = require("./routes/comments");
+var campgroundRoutes = require("./routes/campgrounds");
+var authRoutes = require("./routes/auth");
+
 mongoose.connect("mongodb://localhost/yelp_camp");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -29,5 +34,9 @@ app.use(function(req, res, next){
   res.locals.currentUser = req.user;
   next();
 });
+
+app.use(authRoutes);
+app.use(campgroundRoutes);
+app.use(commentRoutes);
 
 app.listen(3001, () => console.log(`It's over Anakin. I have the high ground`));
