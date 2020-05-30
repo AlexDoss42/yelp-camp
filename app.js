@@ -129,7 +129,11 @@ app.post("/register", function(req, res){
     passport.authenticate("local")(req, res, function(){
       res.redirect("/campgrounds");
     });
-  })
+  });
+});
+
+app.get("/login",function(req, res){
+  res.render("/login");
 });
 
 app.listen(3001, () => console.log(`It's over Anakin. I have the high ground`));
