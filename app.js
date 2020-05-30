@@ -86,7 +86,7 @@ app.get("/campgrounds/:id", function(req, res){
 
 // Comments routes
 
-app.get("/campgrounds/:id/comments/new", function(req, res){
+app.get("/campgrounds/:id/comments/new", isLoggedIn, function(req, res){
   Campground.findById(req.params.id, function(err, campground){
     if(err){
       console.log(err);
@@ -147,5 +147,12 @@ app.get("/logout", function(req, res){
   req.logOut();
   res.redirect("/campgrounds");
 });
+
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect("/login");
+};
 
 app.listen(3001, () => console.log(`It's over Anakin. I have the high ground`));
