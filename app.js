@@ -115,4 +115,8 @@ app.post("/campgrounds/:id/comments", function(req, res){
     });
 });
 
+app.get("/register", function(req, res){
+  res.render("/register");
+});
+
 app.listen(3001, () => console.log(`It's over Anakin. I have the high ground`));
