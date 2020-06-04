@@ -52,25 +52,17 @@ router.get("/campgrounds/:id/edit", checkCampgroundOwnership, function(req, res)
     });
 });
 
-router.put("/campgrounds/:id", function(req, res){
-  if(req.isAuthenticated()){
+router.put("/campgrounds/:id", checkCampgroundOwnership, function(req, res){
     Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
       if(err){
         res.redirect("/campgrounds")
       } else {
-        if(foundCampground.author.id.equals(req.user._id)){
           res.redirect("/campgrounds/" + req.params.id);
-        } else {
-          res.send("You do not have permission to do that");
-        }
       }
     });
-  } else {
-    
-  }
 });
 
-router.delete("/campgrounds/:id", function(req, res){
+router.delete("/campgrounds/:id", checkCampgroundOwnership, function(req, res){
   Campground.findByIdAndRemove(req.params.id, function(err){
     if(err){
       res.redirect("/campgrounds");
