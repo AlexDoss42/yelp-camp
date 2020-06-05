@@ -1,8 +1,8 @@
-var express = require("express");
 var router = express.Router();
-var Campground = require("../models/campground");
-var Comment = require("../models/comment");
+var express = require("express");
 var middleware = require("../middleware");
+var Comment = require("../models/comment");
+var Campground = require("../models/campground");
 
 router.get("/campgrounds", function(req, res){
   Campground.find({}, function(err, allCampgrounds){
