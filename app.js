@@ -3,11 +3,11 @@ var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require('mongoose');
 var seedDb = require("./seed");
+var flash = require("connect-flash");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 var User = require("./models/user");
 var methodOverride = require("method-override");
-var flash = require("connect-flash");
 
 
 var commentRoutes = require("./routes/comments");
@@ -34,6 +34,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.use(function(req, res, next){
   res.locals.currentUser = req.user;
+  res.locals.message = req.flash("error");
   next();
 });
 
