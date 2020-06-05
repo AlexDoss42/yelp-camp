@@ -43,7 +43,7 @@ router.get("/campgrounds/:id/comments/:comment_id/edit", checkCommentOwnership, 
   });
 });
 
-router.put("/campgrounds/:id/comments/:comment_id", function(req, res){
+router.put("/campgrounds/:id/comments/:comment_id", checkCommentOwnership, function(req, res){
   Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
     if(err){
       res.redirect("back");
@@ -53,7 +53,7 @@ router.put("/campgrounds/:id/comments/:comment_id", function(req, res){
   })
 });
 
-router.delete("/campgrounds/:id/comments/:comment_id", function(req, res){
+router.delete("/campgrounds/:id/comments/:comment_id", checkCommentOwnership, function(req, res){
   Comment.findByIdAndRemove(req.params.comment_id, function(err){
     if(err){
       res.redirect("back");
