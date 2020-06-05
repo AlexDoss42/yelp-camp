@@ -2,13 +2,12 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require('mongoose');
-var Campground = require("./models/campground");
-var Comment = require("./models/comment");
 var seedDb = require("./seed");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 var User = require("./models/user");
 var methodOverride = require("method-override");
+var flash = require("connect-flash");
 
 
 var commentRoutes = require("./routes/comments");
@@ -20,6 +19,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
+app.use(flash());
 seedDb();
 
 app.use(require("express-session")({
