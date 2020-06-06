@@ -20,7 +20,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
-seedDb();
+// seedDb();
 
 app.use(require("express-session")({
   secret: "jfaspdoh23498J_@*$H_)ASNCOAWJRN_AD)*(JR!fasd",
